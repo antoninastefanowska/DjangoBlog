@@ -1,0 +1,9 @@
+{% if lista_kategorii %}
+    {% for kategoria in lista_kategorii %}
+        <li>
+            <a href="{% url 'kategoria' kategoria.nazwa %}">
+                {{ kategoria.nazwa }}
+            </a>
+        </li>
+    {% endfor %}
+{% endif %}

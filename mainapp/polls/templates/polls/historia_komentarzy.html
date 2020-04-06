@@ -1,0 +1,70 @@
+{% extends 'polls/panel.html' %}
+
+{% block content %}
+<style>
+    #usun_kom
+    {
+        text-decoration:none;
+        color:black;"
+    }
+    #usun_kom:hover
+    {
+        color:#ff0000;"
+    }
+    .komment
+    {
+        border-radius:10px;
+        background-color:#006870;
+        color:white;
+        padding:9px;
+    }
+    .nazwa_bloga
+    {
+        width:100%;
+        border-radius:5px;
+        margin-bottom:4px;
+        padding-top:3px;
+        padding-bottom:3px;
+        color:black;
+        background-color:#00ffcc;
+        text-align:center;
+        font-family:FreeMono, monospace;
+    }
+</style>
+    {% if lista_komentarzy %}
+        <h1>
+            Historia:
+        </h1>
+        {% for comment in lista_komentarzy reversed %}
+        <a href="{% url 'post' comment.post.id %}">
+            <div class="komment">
+                <div class="nazwa_bloga">
+                    BLOG: <u><b>{{comment.post.blog.nazwa}}</b></u> POST: <u><b>{{comment.post.tytul}}</b></u>
+                </div>
+                <div style="float:left;color:white;">
+                    <i class="icon-user-circle-o"></i> <strong>{{ comment.kto }}</strong> - {{ comment.kiedy }}
+                </div>
+                <div style="float:right;color:white;">
+                    <div style="color:white;float:left;">
+                        |
+                    </div>
+                    {% if comment.kto == request.user %}
+
+                    <a id="usun_kom" href="{% url 'usun_komentarz' comment.id %}">
+                        <i class="icon-trash-empty"></i> USUŃ
+                    </a>
+                    {% endif %}
+                </div>
+               <div style="clear:both;margin:2px;">
+                   <i>{{ comment.tresc }}</i>
+               </div>
+            </div>
+            <br/>
+        </a>
+        {% endfor %}
+    {% else %}
+        <div class="brakPostow">
+            Brak komentarzy.
+        </div>
+    {% endif %}
+{% endblock %}

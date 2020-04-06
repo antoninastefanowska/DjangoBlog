@@ -1,0 +1,55 @@
+{% extends 'polls/base.html' %}
+
+{% block extendedContent %}
+    <div class="formularz">
+        <div class="authWrapper">
+            <div class="naglowek2">
+                <h1>Rejestracja</h1>
+            </div>
+            <div class="formularzDane">
+                <form action="/rejestracja/" method="POST">{% csrf_token %}
+                    <div class="wiersz">
+                        <div class="etykiety">
+                            <label for="username">Login:</label>
+                        </div>
+                        <div class="pola">
+                            {{ form.username }}
+                        </div>
+                    </div>
+                    <div class="wiersz">
+                        <div class="etykiety">
+                            <label for="email">E-mail:</label>
+                        </div>
+                        <div class="pola">
+                            {{ form.email }}
+                        </div>
+                    </div>
+                    <div class="wiersz">
+                        <div class="etykiety">
+                            <label for="password">Hasło:</label>
+                        </div>
+                        <div class="pola">
+                            {{ form.password }}
+                        </div>
+                    </div>
+                    <div class="zatwierdz">
+                        <input type="submit" value="Zarejestruj">
+                    </div>
+                    <div class="bledy">
+                        {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+                        {{ form.non_field_errors }}
+                        {% if aktywacja %}
+                            Pod podany adres e-mail został wysłany link aktywacyjny.
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

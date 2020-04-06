@@ -1,0 +1,32 @@
+{% extends 'polls/base.html' %}
+{% load polecane %}
+
+<style>
+    #polecane
+    {
+        text-align:center;
+        margin-left:auto;
+        margin-right:auto;
+        background-color:red;
+
+    }
+</style>
+{% block extendedContent %}
+    <div id="leftContainer">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div id="rightContainer">
+        {% if request.user.is_authenticated %}
+            Witaj <i>{{ request.user.username }}</i> !
+        {% else %}
+            Niezalogowany
+        {% endif %}
+        <hr>
+        <div id="polecane">
+            <br/>
+            Polecane posty <i class="icon-award"></i>
+        </div>
+       {% polecane %}
+    </div>
+{% endblock %}

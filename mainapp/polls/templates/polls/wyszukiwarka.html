@@ -1,0 +1,55 @@
+{% extends 'polls/panel.html' %}
+<style>
+    .fromularzDane
+    {
+        width:100%;
+    }
+</style>
+{% block content %}
+<div class="formularz">
+        <div class="naglowek2">
+            <h1>Szukaj</h1>
+        </div>
+        <div class="formularzDane">
+            <form method="POST">{% csrf_token %}
+                <div class="wiersz">
+                    <div class="etykiety">
+                        <label for="slowa_kluczowe">Słowa kluczowe:</label>
+                    </div>
+                    <div class="pola">
+                        {{ form.slowa_kluczowe }}
+                    </div>
+                </div>
+                <div class="wiersz">
+                    <div class="etykiety">
+                        <label for="blog">Blog:</label>
+                    </div>
+                    <div class="pola">
+                        {{ form.blog }}
+                    </div>
+                </div>
+                <div class="wiersz">
+                    <div class="etykiety">
+                        <label for="kategoria">Kategoria:</label>
+                    </div>
+                    <div class="pola">
+                        {{ form.kategoria }}
+                    </div>
+                </div>
+                <div class="zatwierdz">
+                    <input type="submit" name="submit" value="Szukaj">
+                </div>
+                <div class="bledy">
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    {{ form.non_field_errors }}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,155 @@
+{% extends 'polls/panel.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap3 %}
+{% block content %}
+<style>
+    #usun_kom
+    {
+        text-decoration:none;
+        color:black;"
+    }
+    #usun_kom:hover
+    {
+        color:#ff0000;"
+    }
+    .komment
+    {
+        border-radius:10px;
+        background-color:#006870;
+        color:white;
+        padding:9px;
+    }
+    .nazwa_bloga_w_poscie
+    {
+        float:left;
+        color:teal;
+        border-radius:7px;
+        padding:4px;
+        background-color:white;
+        border:1px solid;
+    }
+    .kategoria_postu
+    {
+        float:right;
+        color:teal;
+    }
+    .podwojnapaka
+    {
+
+    }
+</style>
+    <div class="post">
+        <div class="topContainerPost">
+            <div class="podwojnapaka">
+                <a href="{% url 'blog' post.blog.nazwa %}">
+                    <div class="nazwa_bloga_w_poscie">
+                        Blog: {{ post.blog.nazwa }}
+                    </div>
+                </a>
+                <a href="{% url 'kategoria' post.kategoria %}">
+                    <div class="kategoria_postu">
+                        Kategoria: {{ post.kategoria }}
+                    </div>
+                </a>
+            </div>
+            <div style="clear:both;padding-left:4px;" >
+                <div class="autor">
+                    Autor: {{ post.blog.autor }}
+                </div>
+                <div class="data">
+                    {{ post.data }}
+                </div>
+            </div>
+        </div>
+        <div class="middleContainerPost">
+            <div class="tytul" style="padding:4px;width:100%;border-radius:7px;margin-left:auto">
+                {{ post.tytul }}
+            </div>
+        </div>
+        <div class="bottomContainerPost" style="background-color:669999;border-top-left-radius:14px;
+                border-top-right-radius:14px ;
+                border-bottom-right-radius:14px ;
+                border-bottom-left-radius:14px ; padding:10px;color:white; ">
+            {{ post.zawartosc|linebreaksbr }}
+            {% if post.obrazek %}
+            <div class="obrazek">
+                 <a href="{{ post.obrazek.url }}">
+                     <img src="{{ post.obrazek.url }}" class="img-responsive">
+                </a>
+             </div>
+            {% endif %}
+
+        </div>
+        <div class="komentarze">
+            <div>
+                <div style="float:right; font-size: 16px; text-aling:left;">
+                {% if request.user.is_authenticated %}
+                    {% if post.blog == twoj_blog %}
+                        <a id="usun_kom" href="{% url 'edytuj_post' post.id %}">
+                                <i class="icon-edit"></i> EDYTUJ
+                        </a>
+                        <a id="usun_kom" href="{% url 'usun_post' post.id %}">
+                                <i class="icon-trash-empty"></i> USUŃ
+                        </a>
+                    {% else %}
+                        Oceń:
+                        <a href = "{% url 'plusuj_post' post.id %}">
+                            <i class="icon-thumbs-up-alt" style="color:green;"></i>
+                        </a> -
+                        <a href = "{% url 'minusuj_post' post.id %}">
+                            <i class="icon-thumbs-down-alt" style="color:red;"></i>
+                        </a>
+                    {% endif %}
+                {% endif %}
+                <div>
+                    <p>Ocena: {{ plusy }} ({{ ocena }})</p>
+                </div>
+                </div>
+                <div style="float:left;">
+                    <p>Liczba odwiedzających: {{ licznik_odwiedzin }}</p>
+                    <p>Liczba komentarzy pod postem: {{ lista_komentarzy.count }}</p>
+                </div>
+                <div style="clear:both;">
+                {% if request.user.is_authenticated and form %}
+                <h3>Dodaj Komentarz! :)</h3>
+                <form method="POST">{% csrf_token %}
+                    {{ form.tresc }}
+                    <input type="submit" value="Dodaj Komentarz" class="btn btn-default" />
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    {{ form.non_field_errors }}
+                </form>
+                {% endif %}
+                </div>
+            </div>
+            <div>
+                {% for comment in lista_komentarzy reversed %}
+                    <div class="komment">
+                        <div style="float:left;">
+                            <i class="icon-user-circle-o"></i> <strong>{{ comment.kto }}</strong> - {{ comment.kiedy }}
+                        </div>
+                        <div style="float:right;">
+                            |
+                            {% if comment.kto == request.user %}
+                            <a id="usun_kom" href="{% url 'usun_komentarz' comment.id %}">
+                                <i class="icon-trash-empty"></i> USUŃ
+                            </a>
+                            {% endif %}
+                        </div>
+                       <div style="clear:both;margin:2px;">
+                           <i>{{ comment.tresc }}</i>
+                       </div>
+                    </div>
+                    <br/>
+                {% empty %}
+                <p>Brak komentarzy</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'polls/panel.html' %}
+
+{% block content %}
+    <div class="naglowek2">
+        <h1>{{ blog.nazwa }}</h1>
+    </div>
+    <div>
+        Autor: {{ blog.autor }}
+    </div>
+    <div class="motto">
+        "{{ blog.motto }}"
+    </div>
+    <hr>
+    </br>
+    {% if lista_postow %}
+        {% for post in lista_postow %}
+            <a href="{% url 'post' post.id %}">
+                <div class="post">
+                    <div class="topContainerPost">
+                        <div class="autor">
+                            autor: {{ post.blog.autor }}
+                        </div>
+                        <div class="data">
+                            {{ post.data }}
+                        </div>
+                    </div>
+                    <div class="middleContainerPost">
+                        <div class="tytul">
+                            {{ post.tytul }}
+                        </div>
+                    </div>
+                    <div class="bottomContainerPost">
+                    {% if post.haslo %}
+                        <div class="lock">
+                            <i class="icon-lock"></i>
+                        </div>
+                    {% else %}
+                        {{ post.zawartosc|truncatewords:100 }}
+                    {% endif %}
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    {% else %}
+        <div class="brakPostow">
+            Na blogu nie ma jeszcze żadnych postów
+        </div>
+    {% endif %}
+{% endblock %}

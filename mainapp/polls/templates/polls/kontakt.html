@@ -1,0 +1,82 @@
+{% extends 'polls/panel.html' %}
+
+{% block content %}
+
+<style>
+    .kontaktbody
+    {
+        border-radius: 30px;
+        width:100%;
+        height:100%;
+        color:white;
+        background: teal;
+        text-align:center;
+        padding-top:20px;
+        padding-bottom:20px;
+
+        font-size:24px;
+        font-family: Courier;
+    }
+    .sklad
+    {
+        border-radius:10px;
+        background:#669999;
+        color:black;
+        width: 50%;
+        margin-top:25px;
+        margin-left:auto;
+        margin-right:auto;
+        text-shadow: 1px 1px black;
+        padding-top:8px;
+        padding-bottom:5px;
+    }
+
+</style>
+
+
+<div>
+    <div class="kontaktbody">
+        <div>
+            Aplikacja powstała na potrzeby projektu z przedmiotu
+        <br/>
+        <h3>'Rozwiązania Szkieletowe w Tworzeniu Aplikacji'</h3>
+
+        Celem było stworzenie strony, która obsługiwałaby wiele blogów,
+        pozwalałaby na dodawanie postów
+        <br/>
+        oraz ich komentowanie.
+        <br/>
+        </div>
+
+        <div class="sklad">
+                W skład zespołu wchodzą:
+            <br/>
+            <br/>
+
+                Antonina Stefanowska
+                <br/>
+                Tomasz Łoszczyk
+                <br/>
+                Artur Strzałkowski
+                <br/>
+                Hubert Sokołowski
+
+        </div>
+        <br/>
+        <br/>
+        <div>
+            Wykorzystany został framework 'DJANGO', który został napisany w jezyku Python.
+            Cała aplikacja znajduje się na serwerze <b><i>pythonanywhere.com</i></b> pod nazwą
+        </div>
+        <br/>
+        <div>
+            <a href="http://ps9szkielety.pythonanywhere.com" >http://ps9szkielety.pythonanywhere.com</a>
+        </div>
+
+
+
+
+
+    </div>
+</div>
+{% endblock %}

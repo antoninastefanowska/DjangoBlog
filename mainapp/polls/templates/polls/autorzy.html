@@ -1,0 +1,35 @@
+{% extends 'polls/panel.html' %}
+
+<style>
+    .aut
+    {
+        height:50px;
+        width:50px;
+        background-color:teal;
+        color:black;
+        border-radius:20px;
+    }
+</style>
+
+{% block content %}
+<br/>
+<br/>
+    {% if lista_autorow %}
+
+        {% for aut in lista_autorow %}
+
+                <a href="{% url 'blog_uzytkownika' aut.id %}">
+                    <div class="autorLista">
+                        {{ aut.username }}
+                    </div>
+                </a>
+
+
+        {% endfor %}
+
+    {% else %}
+        <div class="brakPostow">
+            Nikt jeszcze nie założył konta
+        </div>
+    {% endif %}
+{% endblock %}

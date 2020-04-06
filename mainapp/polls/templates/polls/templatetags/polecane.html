@@ -1,0 +1,40 @@
+{% if lista_polecanych %}
+        {% for post in lista_polecanych %}
+            <a href="{% url 'post' post.id %}">
+                <div class="post">
+                    <div class="topContainerPost">
+                        <div class="autor">
+                            Blog: {{ post.blog.nazwa }}
+                        </div>
+                        <div class="data">
+                            {{ post.data }}
+                        </div>
+                    </div>
+                    <div class="middleContainerPost">
+                        <div class="tytul">
+                            {{ post.tytul }}
+                        </div>
+                    </div>
+                    <div class="bottomContainerPost">
+                        {% if post.haslo %}
+                        [POST ZABLOKOWANY]
+                        {% else %}
+                        {{ post.zawartosc|truncatewords:100 }}
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+{% else %}
+    <div class="brakPostow">
+        {% if uzytkownik.is_authenticated %}
+            {% if brak_polubionych %}
+                Polub przynajmniej 1 post, aby otrzymać rekomendacje.
+            {% elif brak_nowych %}
+                Brak nowych rekomendacji.
+            {% endif %}
+        {% else %}
+            Zaloguj się, aby otrzymać rekomendacje postów.
+        {% endif %}
+    </div>
+{% endif %}

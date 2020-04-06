@@ -1,0 +1,33 @@
+{% extends 'polls/panel.html' %}
+{% block content %}
+    <div class="formularz">
+        <div class="formularzDane">
+            <form method="POST">{% csrf_token %}
+                <div class="etykiety">
+                    <div class="wiersz">
+                        <label for="haslo">Hasło:</label>
+                    </div>
+                </div>
+                <div class="pola">
+                    {{ form.haslo }}
+                </div>
+                <div class="zatwierdz">
+                    <input type="submit" value="Odblokuj">
+                </div>
+                <div class="bledy">
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    {{ form.non_field_errors }}
+                    {% if invalid %}
+                        Nieprawidłowe hasło!
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

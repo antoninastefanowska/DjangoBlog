@@ -1,0 +1,247 @@
+{% load staticfiles %}
+{% load kategorie %}
+<head>
+    <title>Blogosfera</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'Fontello/css/fontello.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"> <!--czcionka-->
+    <style>
+        #blogosfera
+        {
+            color:white;
+            font-family: 'Indie Flower', cursive;
+            font-size:50px;
+            text-align:center;
+            padding : 5px;
+        }
+        .icon-chat
+        {
+            color:darkslategray;
+        }
+        #stopka
+        {
+            font-weight:normal;
+        }
+        #menu2
+        {
+            width:99%;
+            background-color:teal;
+            overflow : hidden;
+
+        }
+        #menu2_lewy
+        {
+            float:left;
+
+        }
+        #menu2_prawy
+        {
+            float:right;
+            padding-right:15px;
+        }
+        .przycisk2 {
+            display : inline-block;
+            padding : 5px;
+            background-color : teal;
+            color : lightcyan;
+        }
+        .przycisk2:hover {
+            display : inline-block;
+            padding : 5px;
+            background-color : lightcyan;
+            color : teal;
+        }
+        a.logo,
+        a.logo:hover,
+        a.logo:after,
+        a:link
+        {
+            text-decoration:none;
+            color:white;
+        }
+        .przycisk3{
+
+            display : inline-block;
+            margin-top:3px;
+            margin-bottom:3px;
+            padding : 5px;
+            background-color : lightcyan;
+            color : lightseagreen;
+            border-radius: 5px;
+        }
+        .przycisk3:hover {
+            display : inline-block;
+            margin-top:3px;
+            margin-bottom:3px;
+            padding : 5px;
+            background-color : teal;
+            color : lightcyan;
+            border-radius: 5px;
+        }
+
+        .post {
+            border-radius : 10px;
+            margin-bottom : 10px;
+            background-color : paleturquoise;
+            color : darkslategray;
+            padding : 5px;
+            font-size : 12px;
+        }
+
+        .autorLista {
+            display : inline-block;
+            border-radius : 10px;
+            background-color : paleturquoise;
+            color : darkslategray;
+            padding : 5px;
+            font-size : 20px;
+            margin : 5px;
+        }
+
+        .autor {
+            float : left;
+        }
+
+        .data {
+            float : right;
+        }
+
+        .tytul {
+            clear : both;
+            font-weight : bold;
+        }
+        .lista
+        {
+            background-color:teal;
+            width:100%;
+            text-align:center;
+            padding: 0;
+        }
+        ol
+        {
+        	padding: 0;
+        	margin: 0;
+        	list-style-type: none;
+        	font-size: 18px;
+        	height: 35px;
+        	line-height: 200%;
+        	display: inline-block;
+        }
+
+        ol a
+        {
+        	color: #ffffff;
+        	text-decoration: none;
+        	display: block;
+        }
+
+        ol > li
+        {
+        	float: left;
+            width: 165px;
+        	height: 40px;
+        	border-right: 1px dashed white;
+        }
+
+        ol > li:first-child
+        {
+        	border-left: 1px dashed white;
+        }
+
+        ol > li:hover
+        {
+        	background-color: lightcyan;
+        }
+
+        ol > li:hover > a
+        {
+        	color: teal;
+        }
+
+        ol > li > ul
+        {
+        	list-style-type: none;
+        	padding: 0;
+        	margin: 0;
+        	height: 40px;
+        	display: none;
+        }
+
+        ol > li:hover > ul
+        {
+        	display: block;
+        }
+
+        ol > li > ul > li
+        {
+        	background-color:#4c7c7c;
+        	position: relative;
+        	z-index: 100;
+        	border-top: 1px dashed white;
+        }
+
+        ol > li > ul > li:hover
+        {
+        	background-color: #6c9696;
+        }
+
+        ol > li > ul > li:hover > a
+        {
+        	color: #451717;
+        }
+    </style>
+</head>
+<body>
+    <div id="strona">
+        <div id="topContainer">
+            <div id="naglowek">
+                <div id="blogosfera">
+                    <a class="logo" href="/"> Blogosfera<i class="icon-chat"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="lista">
+            <ol>
+                <li><a href="{% url 'post_list' %}"><i class="icon-database"></i>HOME</a></li>
+                <li><a href="{% url 'szukaj' %}"><i class="icon-search-outline"></i>SZUKAJ</a></li>
+                <li><a href="#"><i class="icon-menu"></i>KATEGORIE</a>
+                    <ul>{% kategorie %}</ul>
+                </li>
+                <li><a href="{% url 'uzytkownicy' %}"><i class="icon-address-card-o"></i> AUTORZY</a></li>
+                <li><a href="{% url 'kontakt' %}"><i class="icon-mail-alt"></i> KONTAKT</a></li>
+                {% if request.user.is_authenticated %}
+                    {% if twoj_blog is None %}
+                        <li><a href="{% url 'zaloz_bloga' %}"><i class="icon-angellist"></i>ZAŁÓŻ BLOG</a></li>
+                    {% else %}
+                        <li><a href="{% url 'blog' twoj_blog.nazwa %}"><i class="icon-user"></i>TWÓJ BLOG</a>
+                            <ul>
+                                <li><a href="{% url 'dodaj_post' %}"><i class="icon-chrome"></i>DODAJ POST</a></li>
+                                <li><a href="{% url 'edytuj_bloga' %}"><i class="icon-sliders"></i>USTAWIENIA</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                <li><a href="#"><i class="icon-calendar"></i>HISTORIA</a>
+                    <ul>
+                        <li><a href="{% url 'historia_odwiedzanych' %}">ODWIEDZANE</a></li>
+                        <li><a href="{% url 'historia_plusowanych' %}">PLUSOWANE</a></li>
+                        <li><a href="{% url 'historia_minusowanych' %}">MINUSOWANE</a></li>
+                        <li><a href="{% url 'historia_komentarzy' %}">KOMENTARZE</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'wyloguj' %}"><i class="icon-off"></i>WYLOGUJ</a></li>
+                {% else %}
+                <li><a href="{% url 'logowanie' %}"><i class="icon-login"></i>LOGOWANIE</a></li>
+                <li><a href="{% url 'rejestracja' %}"><i class="icon-user-plus"></i>REJESTRACJA</a></li>
+                {% endif %}
+            </ol>
+        </div>
+        <div id="bottomContainer">
+            {% block extendedContent %}
+            {% endblock %}
+        </div>
+        <footer class="stopka">2018 &copy; Projekt twórców ATAH<i class="icon-apple"></i> </footer>
+    </div>
+</body>

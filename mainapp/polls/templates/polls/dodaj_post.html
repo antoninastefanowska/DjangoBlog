@@ -1,0 +1,66 @@
+{% extends 'polls/panel.html' %}
+
+{% block content %}
+    <div class="formularz">
+        <div class="naglowek2">
+            <h1>Dodaj/Edytuj Post</h1>
+        </div>
+        <div class="formularzDane">
+            <form method="POST" enctype='multipart/form-data'>{% csrf_token %}
+                <div class="wiersz">
+                    <div class="wiersz">
+                        <label for="tytul">Tytul:</label>
+                    </div>
+                    <div>
+                        {{ form.tytul }}
+                    </div>
+                </div>
+                <div class="wiersz">
+                    <div class="wiersz">
+                        <label for="zawartosc">Zawartosć:</label>
+                    </div>
+                    <div>
+                        {{ form.zawartosc }}
+                    </div>
+                </div>
+                <div class="wiersz">
+                    <div class="wiersz">
+                        <label for="kategoria">Kategoria:</label>
+                    </div>
+                    <div>
+                        {{ form.kategoria }}
+                    </div>
+                </div>
+                <div class="wiersz">
+                    <div class="wiersz">
+                        <label for="haslo">Hasło:</label>
+                    </div>
+                    <div>
+                        {{ form.haslo }}
+                    </div>
+                </div>
+                <div class="wiersz">
+                    <div class="wiersz">
+                        <label for="obrazek">Obrazek:</label>
+                    </div>
+                    <div>
+                        {{ form.obrazek }}
+                    </div>
+                </div>
+                <div class="zatwierdz">
+                    <input type="submit" value="Zatwierdź">
+                </div>
+                <div class="bledy">
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    {{ form.non_field_errors }}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

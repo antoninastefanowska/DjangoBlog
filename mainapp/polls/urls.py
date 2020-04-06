@@ -1,0 +1,31 @@
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.post_list, name='post_list'),
+    url(r'^posts/(?P<post_id>[0-9]+)/$', views.post, name='post'),
+    url(r'^posts/(?P<post_id>[0-9]+)/odblokuj_post$', views.odblokuj_post, name='odblokuj_post'),
+    url(r'^posts/(?P<post_id>[0-9]+)/usun_post$', views.usun_post, name='usun_post'),
+    url(r'^posts/(?P<post_id>[0-9]+)/edytuj_post$', views.edytuj_post, name='edytuj_post'),
+    url(r'^posts/(?P<post_id>[0-9]+)/plusuj_post$', views.plusuj_post, name='plusuj_post'),
+    url(r'^posts/(?P<post_id>[0-9]+)/minusuj_post$', views.minusuj_post, name='minusuj_post'),
+    url(r'^aktywacja/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.aktywacja, name='aktywacja'),
+    url(r'^rejestracja', views.rejestracja, name='rejestracja'),
+    url(r'^logowanie', views.logowanie, name='logowanie'),
+    url(r'^wyloguj', views.wyloguj, name='wyloguj'),
+    url(r'^zaloz_bloga', views.zaloz_bloga, name='zaloz_bloga'),
+    url(r'^edytuj_bloga', views.edytuj_bloga, name='edytuj_bloga'),
+    url(r'^dodaj_post', views.dodaj_post, name='dodaj_post'),
+    url(r'^komentarze/(?P<komentarz_id>[0-9]+)/usun_komentarz/$', views.usun_komentarz, name='usun_komentarz'),
+    url(r'^uzytkownicy/(?P<uzytkownik_id>[0-9]+)/blog_uzytkownika/$', views.blog_uzytkownika, name='blog_uzytkownika'),
+    url(r'^uzytkownicy', views.uzytkownicy, name='uzytkownicy'),
+    url(r'^kontakt', views.kontakt, name='kontakt'),
+    url(r'^szukaj', views.szukaj, name='szukaj'),
+    url(r'^wyniki_wyszukiwania/(?P<slowa_kluczowe>[\w\ ]+)/(?P<blog>[\w\ ]+)/(?P<kategoria>[\w\ ]+)/$', views.wyniki_wyszukiwania, name='wyniki_wyszukiwania'),
+    url(r'^blogi/(?P<blog_nazwa>[\w\- ]+)/$', views.blog, name='blog'),
+    url(r'^kategorie/(?P<kategoria_nazwa>[\w\- ]+)/$', views.kategoria, name='kategoria'),
+    url(r'^historia/odwiedzane', views.historia_odwiedzanych, name='historia_odwiedzanych'),
+    url(r'^historia/plusowane', views.historia_plusowanych, name='historia_plusowanych'),
+    url(r'^historia/minusowane', views.historia_minusowanych, name='historia_minusowanych'),
+    url(r'^historia/komentarze', views.historia_komentarzy, name='historia_komentarzy'),
+]

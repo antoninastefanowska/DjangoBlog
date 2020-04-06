@@ -1,0 +1,200 @@
+body {
+    font-family : Verdana;
+    font-size : 16px;
+    color : darkslategray;
+    background-color : lightcyan;
+    overflow-x : hidden;
+    height : 100%;
+    margin : 0;
+}
+
+.wyszukiwarka
+{
+
+    display : inline-block;
+    padding : 5px;
+    background-color : teal;
+    color : lightcyan;
+}
+
+
+#strona {
+    margin-right : -1%;
+    margin-left : -1%;
+    width : 102%;
+    height : 100%;
+    overflow : hidden;
+    display : flex;
+    flex-direction : column;
+}
+
+#topContainer {
+    width : 100%;
+    margin-left : 1%;
+}
+
+#naglowek {
+    padding : 10px;
+    background-color : lightseagreen;
+    text-align : left;
+    font-weight : bold;
+    font-size : 30px;
+    font-family:Verdana;
+}
+
+#menu {
+    background-color : teal;
+    color : lightcyan;
+    font-weight : bold;
+}
+
+.przycisk {
+    display : inline-block;
+    padding : 5px;
+    background-color : teal;
+    color : lightcyan;
+}
+
+.przycisk:hover {
+    display : inline-block;
+    padding : 5px;
+    background-color : lightcyan;
+    color : teal;
+}
+
+#bottomContainer {
+    display : flex;
+    margin : auto;
+    width : 70%;
+    flex : 1;
+    overflow : auto;
+}
+
+#leftContainer {
+    border-radius: 10px;
+    margin-top : 10px;
+    margin-bottom : 10px;
+    min-height : 150px;
+    width : 70%;
+    float : left;
+    flex : 2;
+    margin-right : 10px;
+    overflow : auto;
+}
+
+#rightContainer {
+    border-radius : 10px;
+    margin-top : 10px;
+    margin-bottom : 10px;
+    background-color : lightseagreen;
+    color : lightcyan;
+    padding : 5px;
+    min-height : 10px;
+    float : right;
+    width : 25%;
+    flex : 1;
+    overflow : auto;
+}
+
+.stopka {
+    background-color : lightseagreen;
+    text-align : center;
+    padding : 5px;
+    font-size : 14px;
+}
+
+.brakPostow {
+    margin-top : 5px;
+    font-weight : bold;
+}
+
+.motto {
+    font-style : italic;
+    margin-bottom : 20px;
+}
+
+.authWrapper {
+    width : 70%;
+    margin : auto;
+}
+
+.formularz {
+    margin : 5% auto;
+    display : block;
+    position : relative;
+    width : 80%;
+}
+
+.formularzDane {
+    margin : auto;
+    display : inline-block;
+    position : relative;
+    padding : 10px;
+    width : 100%;
+    background-color : lightseagreen;
+    color : lightcyan;
+    border-radius : 10px;
+    font-weight : bold;
+}
+
+.etykiety {
+    display : inline-block;
+    float : left;
+}
+
+.pola {
+    display : inline-block;
+    width : 50%;
+    float : right;
+}
+
+.zatwierdz {
+    clear : both;
+    float : right;
+    margin-top : 5px;
+}
+
+.wiersz {
+    padding : 3px;
+    clear : both;
+}
+
+.bledy {
+    clear : both;
+    color : firebrick;
+}
+
+.obrazek img {
+    padding : 10px;
+    display : block;
+    margin : auto;
+    width : 100%;
+    max-width : 400px;
+    border-radius : 20px;
+}
+
+.lock {
+    margin : auto;
+    font-size : 20px;
+}
+
+input[type=text], select, textarea {
+
+    border: 2px solid #ccc;
+
+}
+input[type=submit] {
+    margin-top:3px;
+    padding:5px 15px;
+    background:#ccc;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 10px;
+    border: 2px outset ;
+}
+input[type=submit]:hover {
+    background-color: darkgrey;
+    border: 2px inset ;
+    padding-top:6px 15px;
+}
