@@ -118,3 +118,4 @@ GitHub.sublime-settings
 */Venv/
 */*/migrations/
 */*/logs
+*/static/admin/
